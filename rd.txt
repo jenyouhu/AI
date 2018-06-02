@@ -1,0 +1,46 @@
+如何用Tensorflow对象检测进行像素级分类
+
+一、为了保证本项目成功,需要准备以下内容:
+python3.5(3.5或以上 ,其中pip3 需要升级到 10.1)
+Protobuf 2.6
+Python-tk
+Pillow 1.0
+lxml
+tf Slim (which is included in the "tensorflow/models/research/" checkout)
+Jupyter notebook
+Matplotlib
+Tensorflow
+Cython
+cocoapi
+
+
+注意：下面所说的 pip 都是指python3.5里面的pip3 10.1版本 
+二、ubuntu16.4下安装 
+#For CPU
+pip install tensorflow
+# For GPU
+pip install tensorflow-gpu
+
+三、依赖包安装 
+sudo apt-get install protobuf-compiler python-pil python-lxml python-tk
+sudo pip install Cython
+sudo pip install jupyter
+sudo pip install matplotlib
+
+四、COCO API 安装 
+git clone https://github.com/cocodataset/cocoapi.git
+cd cocoapi/PythonAPI
+make (用 python setup.py install)
+cp -r pycocotools <path_to_tensorflow>/models/research/
+
+五、Protobuf 编译
+# From tensorflow/models/research/
+protoc object_detection/protos/*.proto --python_out=.
+
+
+六、设置PYTHONPATH路径 
+# From tensorflow/models/research/
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+
+七、测试安装 
+python object_detection/builders/model_builder_test.py
