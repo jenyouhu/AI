@@ -1,0 +1,53 @@
+context: {
+  feature: {
+    key  : "video_id"
+    value: {
+      bytes_list: {
+        value: [YouTube video id string]
+      }
+    }
+  }
+  feature: {
+    key  : "labels"
+      value: {
+        int64_list: {
+          value: [1, 522, 11, 172] # The meaning of the labels can be found vocabulary.csv .
+        }
+      }
+    }
+}
+
+feature_lists: {
+  feature_list: {
+    key  : "rgb"
+    value: {
+      feature: {
+        bytes_list: {
+          value: [1024 8bit quantized features]
+        }
+      }
+      feature: {
+        bytes_list: {
+          value: [1024 8bit quantized features]
+        }
+      }
+      ... # Repeated for every second of the video, up to 300
+  }
+  feature_list: {
+    key  : "audio"
+    value: {
+      feature: {
+        bytes_list: {
+          value: [128 8bit quantized features]
+        }
+      }
+      feature: {
+        bytes_list: {
+          value: [128 8bit quantized features]
+        }
+      }
+    }
+    ... # Repeated for every second of the video, up to 300
+  }
+
+}
